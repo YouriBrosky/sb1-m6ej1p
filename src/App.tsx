@@ -9,8 +9,12 @@ function App() {
   const [jwtToken, setJwtToken] = useState('');
   const { devices, error, isLoading, decodedToken, fetchDeviceData } = useDevices();
 
+  const redirectUri = process.env.NODE_ENV === 'production'
+    ? 'https://mock-app-gudxewchcfcrc4c2.westeurope-01.azurewebsites.net/'
+    : 'http://localhost:5173/';
+
   const handleLogin = () => {
-    window.open('https://iam2testingorg.b2clogin.com/iam2testingorg.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_signupsignin&client_id=dccb350d-0369-427a-a602-9f06434653d3&nonce=defaultNonce&redirect_uri=http://localhost:5173/&scope=openid&response_type=id_token&prompt=login', '_blank');
+    window.open(`https://iam2testingorg.b2clogin.com/iam2testingorg.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1_signupsignin&client_id=dccb350d-0369-427a-a602-9f06434653d3&nonce=defaultNonce&redirect_uri=${redirectUri}&scope=openid&response_type=id_token&prompt=login`, '_blank');
   };
 
   const handleTokenSubmit = () => {
