@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Lock, ExternalLink, KeyRound } from 'lucide-react';
 
 interface AuthSectionProps {
@@ -10,6 +10,17 @@ interface AuthSectionProps {
 }
 
 export function AuthSection({ jwtToken, onTokenChange, onLogin, onTokenSubmit, isLoading }: AuthSectionProps) {
+
+  // Extract id_token from URL fragment on component mount
+  useEffect(() => {
+    const hash = window.location.hash;
+    const params = new URLSearchParams(hash.substring(1)); // Remove the leading '#'
+    const idToken = params.get('id_token');
+    if (idToken) {
+      onTokenChange(idToken);
+    }
+  }, [onTokenChange]);
+
   return (
     <div className="bg-white rounded-lg shadow-xl p-6 mb-8">
       <div className="flex items-center mb-4">
