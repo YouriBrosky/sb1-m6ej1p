@@ -6,7 +6,9 @@ interface DeviceListProps {
   devices: DeviceData[];
 }
 
-export function DeviceList({ devices }: DeviceListProps) {
+export function DeviceList({ devices = [] }: DeviceListProps) {
+  console.log(devices);
+
   return (
     <div className="bg-white rounded-lg shadow-xl p-6 mb-8">
       <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
